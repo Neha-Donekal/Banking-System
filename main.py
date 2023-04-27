@@ -139,3 +139,4 @@ while play == True:
 
 cur.close()
 con.close()
+#git commit --amend --reset-author
