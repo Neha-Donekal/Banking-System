@@ -1,13 +1,6 @@
-"""import webbrowser
-
-
-url = "index.html"
-
-chrome_path = 'open -a /Applications/Google\ Chrome.app %s'
-
-webbrowser.get(chrome_path).open(url)"""
-
+import tkinter as tk
 import pymysql
+
 
 con = pymysql.Connect(
     host='localhost',
@@ -20,8 +13,6 @@ con = pymysql.Connect(
 
 cur = con.cursor()
 
-print("Hello, thank you for choosing our bank.")
-
 """
 If 1; then ask for bank:  photo ID, birthdate, SSN, an inital deposit amount, 
 phone number
@@ -32,7 +23,7 @@ If 4; provide them all their information and ask which part needs to be
 modified(edit name, PIN, or any other personal identification required to 
 open an account)
 """
-
+print("\n\n Hello! Thank you for choosing our bank!")
 def menu():
     return """
     Your options are:
@@ -42,6 +33,8 @@ def menu():
     4) Modify existing account
     5) Exit
      """
+
+
 def create_account():
     name = input("Enter your name: ")
     username = input("Enter a username(no special characters): ")
@@ -51,8 +44,9 @@ def create_account():
     val = (name, username, password, balance)
     cur.execute(sql4, val)
     con.commit()
-    return "A new account was created for you!"
-    
+    return "A new account was created for you!"    
+
+
 
 def login():
     user = input("Please enter your username: ")
@@ -67,6 +61,8 @@ def login():
         print('Login Successful!')
     else:
         print("Your username or password is wrong. Please try again!")
+
+
 def close():
     sure = input("Are you sure you want to close your account? ").lower()
     if sure == 'yes':
@@ -115,6 +111,8 @@ def modify():
     else:
         print("Something went wrong! Please make sure you entered your Username and Password correctly.")
 
+
+
 play = True
 
 while play == True:
@@ -139,4 +137,3 @@ while play == True:
 
 cur.close()
 con.close()
-#git commit --amend --reset-author
