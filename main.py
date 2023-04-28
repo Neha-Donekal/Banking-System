@@ -30,22 +30,26 @@ def submit():
     choice_var.set("")
 
     if choice == "1":
+        clear_frame()
         enter_info_for_create() 
-        root.winfo_children()[1]
         
-    elif choice == "2":
-        enter_info_for_login()
-        root.winfo_children()[0]
+        
+    elif choice == "2": 
+        clear_frame()      
+        enter_info_for_login()     
 
     elif choice == "3":
+        clear_frame()
         enter_info_for_close()
-        root.winfo_children()[0]
+        
 
     elif choice == "4":
+        clear_frame()
         enter_info_for_modify()
-        root.winfo_children()[1]
+        
 
     elif choice == "5":
+        clear_frame()
         exit()
         exit
 
@@ -69,6 +73,7 @@ def menu():
     choice_label.grid()
     choice_entry.grid()
     sub_btn.grid()
+    
 
 
 
@@ -94,6 +99,8 @@ def create_account():
     con.commit()
     ret = tk.Label(root, text= "Account was successfully created!")
     ret.grid()
+    clear_frame()
+    menu()
 
 def enter_info_for_create():
     label= tk.Label(root, text = "Creating a New Account- No Special characters")
@@ -135,9 +142,13 @@ def login():
     if result == True and result1 == True:
        ret= tk.Label(root, text='Login Successful!')
        ret.grid()
+       clear_frame()
+       menu()
     else:
         ret=tk.Label(root, text="Your username or password is wrong. Please try again!")
         ret.grid()
+        clear_frame()
+        menu()
 
 
 def enter_info_for_login():
@@ -187,6 +198,8 @@ def modify():
             con.commit()
             ret = tk.Label(root, text="Name was modified")
             ret.grid()
+            clear_frame()
+            menu()
         if what == 'username':
             command = 'UPDATE Customer_Details SET Username = %s WHERE Username = %s'
             val = (new, username)
@@ -194,6 +207,8 @@ def modify():
             con.commit()
             ret = tk.Label(root, text="Username was modified")
             ret.grid()
+            clear_frame()
+            menu()
         if what == 'password':
             command = 'UPDATE Customer_Details SET password = %s WHERE Username = %s'
             val = (new, username)
@@ -201,12 +216,18 @@ def modify():
             con.commit()
             ret = tk.Label(root, text="Password was modified")
             ret.grid()
+            clear_frame()
+            menu()
         else:
             ret= tk.Label(root, text="The choice you entered is not correct!")
             ret.grid()
+            clear_frame()
+            menu()
     else:
         ret= tk.Label(root, text="Something went wrong! Please make sure you entered your Username and Password correctly.")
         ret.grid()
+        clear_frame()
+        menu()
 
 def enter_info_for_modify():
     label = tk.Label(root, text= "Modifying Account-")
@@ -250,10 +271,14 @@ def close():
         con.commit()
         ret = tk.Label(root, text="Account was successfully closed!")
         ret.grid()
+        clear_frame()
+        menu()
         
     elif sure == 'no':
         ret=tk.Label(root, text="You chose not to close your account!")
         ret.grid()
+        clear_frame()
+        menu()
 
 def enter_info_for_close():
     label = tk.Label(root, text= "Closing Account-")
@@ -279,8 +304,13 @@ def enter_info_for_close():
 def exit():
     last = tk.Label(root, text="Thank you for coming!")
     last.grid()
+    clear_frame()
     exit
 
+def clear_frame():
+   for widgets in root.winfo_children():
+      widgets.destroy()
+      
 
 print(menu())
 
